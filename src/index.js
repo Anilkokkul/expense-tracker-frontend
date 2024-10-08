@@ -1,13 +1,55 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import IncomeManagement from "./components/IncomeManagement";
+import ExpenseProvider from "./context/expense";
+import ExpenseManagement from "./components/ExpenseManagement";
+import ExpenseOverview from "./components/ExpenseOverview";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  {
+    element: <App />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/income-management",
+        element: <IncomeManagement />,
+      },
+      {
+        path: "/expense-management",
+        element: <ExpenseManagement />,
+      },
+      {
+        path: "/expense-overview",
+        element: <ExpenseOverview />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <SignUp />,
+  },
+  {
+    path: "/sign-in",
+    element: <Login />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ExpenseProvider>
+      <RouterProvider router={router} />
+    </ExpenseProvider>
   </React.StrictMode>
 );
 
