@@ -8,7 +8,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {
   const { incomeData, expenseData } = useExpense();
-  console.log(incomeData, expenseData);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [totals, setTotals] = useState({
     totalIncome: 0,
@@ -20,7 +19,6 @@ const Dashboard = () => {
     incomesByMonth: [],
     expensesByMonth: [],
   });
-  // console.log(monthlyData);
   const groupDataByMonth = (incomes, expenses) => {
     const incomesByMonth = Array(12).fill(0);
     const expensesByMonth = Array(12).fill(0);
