@@ -1,7 +1,7 @@
 import React from "react";
 
 const ExpenseCard = ({ expense, onEdit, onCancel, isEditing }) => {
-  const { title, amount, category, date, month, _id } = expense;
+  const { title, amount, category, date, month } = expense;
 
   return (
     <div className=" md:w-[300px] relative bg-white shadow-lg rounded-lg overflow-hidden mt-4">

@@ -7,7 +7,7 @@ import ExpenseChart from "./ExpenseChart";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {
-  const { incomeData, expenseData, categories } = useExpense();
+  const { incomeData, expenseData } = useExpense();
   console.log(incomeData, expenseData);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [totals, setTotals] = useState({
