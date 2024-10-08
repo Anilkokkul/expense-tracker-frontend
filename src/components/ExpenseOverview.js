@@ -18,6 +18,7 @@ const ExpenseOverview = () => {
       setFilteredExpenses(filteredExpenses);
     }
   }, [selectedMonth, expenseData]);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Monthly Expenses</h1>
@@ -37,6 +38,9 @@ const ExpenseOverview = () => {
           <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 px-4 py-2 text-left">
+                No.
+              </th>
+              <th className="border border-gray-300 px-4 py-2 text-left">
                 Title
               </th>
               <th className="border border-gray-300 px-4 py-2 text-left">
@@ -51,8 +55,9 @@ const ExpenseOverview = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredExpenses.map((expense) => (
+            {filteredExpenses.map((expense, i) => (
               <tr key={expense._id} className="border-t">
+                <td className="border border-gray-300 px-4 py-2">{i + 1}</td>
                 <td className="border border-gray-300 px-4 py-2">
                   {expense.title}
                 </td>
@@ -71,7 +76,9 @@ const ExpenseOverview = () => {
         </table>
       ) : (
         <p className="text-red-500">
-          No expenses found for the selected month.
+          {selectedMonth
+            ? " No expenses found for the selected month."
+            : "Please select month for expense details."}
         </p>
       )}
     </div>
