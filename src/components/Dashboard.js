@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useExpense } from "../context/expense";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -15,11 +15,10 @@ const Dashboard = () => {
     totalSavings: 0,
   });
 
-  // useEffect(() => {
-  //   getIncomes();
-  //   getExpenses();
-  // }, [getIncomes, getExpenses]);
-
+  useCallback(() => {
+    getIncomes();
+    getExpenses();
+  }, [getIncomes, getExpenses]);
 
   const [monthlyData, setMonthlyData] = useState({
     incomesByMonth: [],
