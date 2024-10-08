@@ -15,10 +15,11 @@ const Dashboard = () => {
     totalSavings: 0,
   });
 
-  useEffect(() => {
-    getIncomes();
-    getExpenses();
-  }, [getIncomes, getExpenses]);
+  // useEffect(() => {
+  //   getIncomes();
+  //   getExpenses();
+  // }, [getIncomes, getExpenses]);
+
 
   const [monthlyData, setMonthlyData] = useState({
     incomesByMonth: [],
