@@ -18,7 +18,7 @@ const Dashboard = () => {
   useEffect(() => {
     getIncomes();
     getExpenses();
-  }, []);
+  }, [getIncomes, getExpenses]);
 
   const [monthlyData, setMonthlyData] = useState({
     incomesByMonth: [],
