@@ -24,7 +24,7 @@ const ExpenseManagement = () => {
         setIsEditing={setIsEditing}
       />
       <h1 className="text-center text-2xl font-bold mt-4">All Expenses</h1>
-      <div className="flex justify-center gap-3">
+      <div className="flex justify-center flex-wrap gap-3">
         {expenseData.map((expense) => {
           return (
             <ExpenseCard

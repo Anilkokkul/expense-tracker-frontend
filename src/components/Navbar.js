@@ -1,7 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { instance } from "../App";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    instance
+      .get("/logout")
+      .then((data) => {
+        alert(data.data.message);
+        navigate("/sign-in");
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+
   return (
     <nav className="bg-[#F4EDE5] px-4 py-6  shadow-md">
       <div className="container mx-auto flex justify-between items-center">
@@ -45,21 +59,31 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <div className="md:hidden">
+        <div className="flex gap-2 items-center">
+          <div className="md:hidden">
+            <button
+              className="text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#C43100]"
+              onClick={() => {
+                document
+                  .getElementById("mobile-menu")
+                  .classList.toggle("hidden");
+              }}
+            >
+              <img src="/menu.png" alt="menu" className="w-10" />
+            </button>
+          </div>
           <button
-            className="text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#C43100]"
-            onClick={() => {
-              document.getElementById("mobile-menu").classList.toggle("hidden");
-            }}
+            onClick={handleLogout}
+            className="bg-red-600 inline-block mb-2 text-white font-bold px-3 py-1 rounded-md shadow-md"
           >
-            <img src="/menu.png" alt="menu" className="w-10" />
+            Logout
           </button>
         </div>
       </div>
 
       <ul
         id="mobile-menu"
-        className="hidden flex flex-col space-y-4 mt-4 px-4 md:hidden"
+        className="flex flex-col space-y-4 mt-4 px-4 md:hidden"
       >
         <li>
           <Link
