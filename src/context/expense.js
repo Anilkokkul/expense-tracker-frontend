@@ -117,6 +117,8 @@ const ExpenseProvider = ({ children }) => {
         categories,
         addCategory,
         editExpense,
+        getIncomes,
+        getExpenses,
       }}
     >
       {children}

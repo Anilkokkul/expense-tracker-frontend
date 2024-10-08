@@ -7,13 +7,18 @@ import ExpenseChart from "./ExpenseChart";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {
-  const { incomeData, expenseData } = useExpense();
+  const { incomeData, expenseData, getIncomes, getExpenses } = useExpense();
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [totals, setTotals] = useState({
     totalIncome: 0,
     totalExpenses: 0,
     totalSavings: 0,
   });
+
+  useEffect(() => {
+    getIncomes();
+    getExpenses();
+  }, []);
 
   const [monthlyData, setMonthlyData] = useState({
     incomesByMonth: [],
@@ -150,7 +155,10 @@ const Dashboard = () => {
           const income = monthlyData.incomesByMonth[index] || 0;
           const expense = monthlyData.expensesByMonth[index] || 0;
           return (
-            <div key={index} className="mb-2 border p-2 rounded-md shadow-md min-h-40">
+            <div
+              key={index}
+              className="mb-2 border p-2 rounded-md shadow-md min-h-40"
+            >
               <h3 className="text-xl font-semibold text-gray-700 mb-2">
                 {month}
               </h3>

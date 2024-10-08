@@ -19,6 +19,7 @@ const Login = () => {
         password,
       });
       setSuccessMessage(res.data.message);
+      alert(res.data.message);
       navigate("/dashboard");
     } catch (error) {
       setErrorMessage(error.response.data.message);

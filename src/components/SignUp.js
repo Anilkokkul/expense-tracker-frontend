@@ -15,12 +15,15 @@ const SignUp = () => {
     setSuccess("");
     try {
       const res = await instance.post("/sign-up", {
+        name,
         email,
         password,
       });
       setSuccess(res.data.message);
+      alert(res.data.message);
       navigate("/sign-in");
     } catch (error) {
+      console.log(error);
       setError(error.response.data.message);
     }
   };
