@@ -20,7 +20,6 @@ const Dashboard = () => {
     getExpenses();
   }, [getIncomes, getExpenses]);
 
-  console.log("dashboard Rendered");
   const [monthlyData, setMonthlyData] = useState({
     incomesByMonth: [],
     expensesByMonth: [],
