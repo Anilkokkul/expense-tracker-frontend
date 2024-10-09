@@ -13,10 +13,8 @@ const IncomeCard = ({ incomeData }) => {
     lockIncome(month)
       .then((data) => {
         alert(data);
-        console.log(data);
       })
       .catch((err) => {
-        console.log(err);
         alert(err);
       });
   };

@@ -95,6 +95,7 @@ const ExpenseProvider = ({ children }) => {
     }
   };
 
+
   const addCategory = async (name) => {
     try {
       const res = await instance.post("/add-category", {
