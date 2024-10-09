@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { instance } from "../App";
 
 const expenseContext = createContext(null);
@@ -10,13 +16,29 @@ const ExpenseProvider = ({ children }) => {
   const [expenseData, setExpenseData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const getIncomes = useCallback(async () => {
+    try {
+      const res = await instance.get("/income");
+      setIncomeData(res.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+  const getExpenses = useCallback(async () => {
+    try {
+      const res = await instance.get("/expense");
+      setExpenseData(res.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
   useEffect(() => {
     if (loggedIn) {
       getIncomes();
       getExpenses();
       getCategories();
     }
-  }, [loggedIn]);
+  }, [loggedIn, getExpenses, getIncomes]);
 
   const loginUser = async (email, password) => {
     try {
@@ -25,15 +47,6 @@ const ExpenseProvider = ({ children }) => {
       return res.data.message;
     } catch (error) {
       return error.response.data.message;
-    }
-  };
-
-  const getIncomes = async () => {
-    try {
-      const res = await instance.get("/income");
-      setIncomeData(res.data.data);
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -54,15 +67,6 @@ const ExpenseProvider = ({ children }) => {
       return res.data.message;
     } catch (error) {
       return error.response.data.message;
-    }
-  };
-
-  const getExpenses = async () => {
-    try {
-      const res = await instance.get("/expense");
-      setExpenseData(res.data.data);
-    } catch (error) {
-      console.error(error);
     }
   };
 
