@@ -112,23 +112,32 @@ const Dashboard = () => {
   return (
     <div className="max-w-7xl mx-auto p-5 mt-5 bg-white shadow-lg  rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-700 mb-4">Dashboard</h2>
-      <div className="mb-6">
-        <label className="block text-gray-700 font-medium mb-2" htmlFor="year">
-          Select Year:
-        </label>
-        <select
-          id="year"
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-          className="w-28 p-2 border rounded-lg focus:outline-none focus:border-blue-400"
-        >
-          {uniqueYears.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
+      {uniqueYears.length > 0 ? (
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 font-medium mb-2"
+            htmlFor="year"
+          >
+            Select Year:
+          </label>
+          <select
+            id="year"
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+            className="w-28 p-2 border rounded-lg focus:outline-none focus:border-blue-400"
+          >
+            {uniqueYears.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : (
+        <p className="font-bold text-xl my-5 text-red-500">
+          You don't have any Incomes and Expenses To Show.
+        </p>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="p-4 border rounded-lg bg-blue-100">
           <h3 className="text-lg font-medium text-blue-800">Total Income</h3>
