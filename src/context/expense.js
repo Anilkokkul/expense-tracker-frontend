@@ -9,11 +9,25 @@ const ExpenseProvider = ({ children }) => {
   const [incomeData, setIncomeData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
-    getIncomes();
-    getExpenses();
-    getCategories();
-  }, []);
+    if (loggedIn) {
+      getIncomes();
+      getExpenses();
+      getCategories();
+    }
+  }, [loggedIn]);
+
+  const loginUser = async (email, password) => {
+    try {
+      const res = await instance.post("/login", { email, password });
+      setLoggedIn(true);
+      return res.data.message;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  };
+
   const getIncomes = async () => {
     try {
       const res = await instance.get("/income");
@@ -29,7 +43,6 @@ const ExpenseProvider = ({ children }) => {
       getIncomes();
       return res.data.message;
     } catch (error) {
-      console.error(error);
       return error.response.data.message;
     }
   };
@@ -40,7 +53,6 @@ const ExpenseProvider = ({ children }) => {
       getIncomes();
       return res.data.message;
     } catch (error) {
-      console.error(error);
       return error.response.data.message;
     }
   };
@@ -95,7 +107,6 @@ const ExpenseProvider = ({ children }) => {
     }
   };
 
-
   const addCategory = async (name) => {
     try {
       const res = await instance.post("/add-category", {
@@ -120,6 +131,7 @@ const ExpenseProvider = ({ children }) => {
         editExpense,
         getIncomes,
         getExpenses,
+        loginUser,
       }}
     >
       {children}

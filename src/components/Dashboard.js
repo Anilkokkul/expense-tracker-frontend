@@ -15,10 +15,10 @@ const Dashboard = () => {
     totalSavings: 0,
   });
 
-  useCallback(() => {
+  useEffect(() => {
     getIncomes();
     getExpenses();
-  }, [getIncomes, getExpenses]);
+  }, []);
 
   const [monthlyData, setMonthlyData] = useState({
     incomesByMonth: [],
@@ -74,7 +74,6 @@ const Dashboard = () => {
     );
     setMonthlyData({ incomesByMonth, expensesByMonth });
   }, [selectedYear, incomeData, expenseData]);
-
   const uniqueYears = Array.from(
     new Set([
       ...incomeData.map((income) => parseInt(income.month.split("-")[0])),

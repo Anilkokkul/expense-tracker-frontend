@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { instance } from "../App";
+import { useExpense } from "../context/expense";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,21 +9,20 @@ const Login = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { loginUser } = useExpense();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
     try {
-      const res = await instance.post("/login", {
-        email,
-        password,
-      });
-      setSuccessMessage(res.data.message);
-      alert(res.data.message);
+      const res = await loginUser(email, password);
+      setSuccessMessage(res);
+      alert(res);
       navigate("/dashboard");
     } catch (error) {
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error);
+      alert(error);
     }
   };
   return (
