@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { instance } from "../App";
 import { useExpense } from "../context/expense";
 
 const Login = () => {
