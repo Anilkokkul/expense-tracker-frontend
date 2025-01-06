@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: "https://expense-tracker-server-zvgn.onrender.com",
   withCredentials: true,
 });
 
